@@ -1,0 +1,16 @@
+<div class="login__wrapper">
+  <form class="login__form" [formGroup]="loginForm">
+    <input class="login__input" placeholder="Login" type="text" id="email" formControlName="email" />
+    <span class="login__error" *ngIf="!loginForm.get('email')?.valid && loginForm.get('email')?.touched">Enter valid
+      email! (example: example@mail.ru)</span>
+    <input class="login__input" placeholder="Password" type="password" id="password" formControlName="password" />
+    <span class="login__error" *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched">
+      Password with min length = 6 must contain letters (both uppercase and lowercase) and numbers
+    </span>
+    <div class="login__buttons">
+      <a class="login__register" href="">How to create account?</a>
+      <button class="login__button" type="submit" (click)="onSubmit()">Log in</button>
+    </div>
+
+  </form>
+</div>
