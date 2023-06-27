@@ -13,6 +13,7 @@
   width: 340px;
   min-height: 240px;
   justify-content: space-between;
+  row-gap: 10px;
 }
 .login__input {
   width: 340px;
@@ -35,6 +36,7 @@
 }
 
 .login__register {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

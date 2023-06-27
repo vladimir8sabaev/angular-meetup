@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,11 @@ export class LoginComponent {
     email: FormControl<string | null>;
     password: FormControl<string | null>;
   }>;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit() {
     this.initForm();
   }
+  isRegistered: boolean = true;
   initForm() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -27,19 +29,28 @@ export class LoginComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+          // Validators.minLength(6),
+          // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
         ],
       ],
     });
-    this.subscribeForm();
+    this.loginForm.valueChanges.subscribe(() => (this.isRegistered = true));
   }
-  subscribeForm() {
-    this.loginForm.valueChanges.subscribe((value) =>
-      console.log(`${value.email}: ${value.password}`)
-    );
+  login() {
+    this.authService
+      .login(
+        this.loginForm.value.email || '',
+        this.loginForm.value.password || ''
+      )
+      .subscribe(
+        (data) => console.log(data),
+        (error) => {
+          console.log(error.message);
+          this.isRegistered = false;
+        }
+      );
   }
-  onSubmit() {
-    console.log(this.loginForm);
+  register() {
+    this.authService.register();
   }
 }
