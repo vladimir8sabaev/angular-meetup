@@ -50,7 +50,7 @@ export class LoginComponent {
         }
       );
   }
-  register() {
-    this.authService.register();
+  goToRegisterPage() {
+    this.authService.goToRegisterPage();
   }
 }

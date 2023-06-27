@@ -1,1 +1,22 @@
-<p>register works!</p>
+<div class="login__wrapper">
+  <form class="login__form" [formGroup]="registerForm">
+    <input class="login__input" placeholder="Login" type="text" id="email" formControlName="email" />
+    <span class="login__error" *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">Enter
+      valid
+      email! (example: example@mail.ru)</span>
+    <input class="login__input" placeholder="Password" type="password" id="password" formControlName="password" />
+    <span class="login__error" *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
+      Password must have 6 symbols at least, small and big letters and numbers
+    </span>
+    <input class="login__input" placeholder="FIO" type="text" id="fio" formControlName="fio" />
+    <span class="login__error" *ngIf="!registerForm.get('fio')?.valid && registerForm.get('fio')?.touched">
+      fio must exist
+    </span>
+    <div class="login__buttons">
+      <button class="login__button" type="submit" (click)="register()">Register</button>
+    </div>
+    <span class="login__error" *ngIf="!isAvailable">
+      This email/password pair is already exist
+    </span>
+  </form>
+</div>

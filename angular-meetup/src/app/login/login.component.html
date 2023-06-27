@@ -8,7 +8,7 @@
       Password must exist
     </span>
     <div class="login__buttons">
-      <a class="login__register" (click)="register()">How to create account?</a>
+      <a class="login__register" (click)="goToRegisterPage()">How to create account?</a>
       <button class="login__button" type="submit" (click)="login()">Log in</button>
     </div>
     <span class="login__error" *ngIf="!isRegistered">
