@@ -5,10 +5,13 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { User } from '../Interfaces/user';
 import { Meetup } from '../Interfaces/meetup';
+import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  public isAdmin = new Subject<boolean>();
+  public isLogged = new Subject<boolean>();
   baseUrl: string = `${environment.backendOrigin}/auth`;
   constructor(private http: HttpClient, private routes: Router) {}
   login(email: string | null, password: string | null) {
@@ -20,6 +23,11 @@ export class AuthService {
       .pipe(
         map((res) => {
           if (res.token) {
+            if (this.user?.roles.length > 1) {
+              this.isAdmin.next(true);
+            }
+            this.isLogged.next(true);
+            console.log(this.isLogged);
             localStorage.setItem('del_meetups_auth_token', res.token);
             this.routes.navigate(['dashboard']);
           }
@@ -59,6 +67,8 @@ export class AuthService {
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
     this.routes.navigate(['login']);
+    this.isLogged.next(false);
+    this.isAdmin.next(false);
   }
   goToRegisterPage() {
     this.routes.navigate(['register']);

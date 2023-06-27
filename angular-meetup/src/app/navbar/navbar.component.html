@@ -1,0 +1,20 @@
+<nav>
+  <div class="img__wrapper">
+    <div class="nav__meetup">
+      <img src="../../assets/MeetUps.png" alt="MeetUps">
+    </div>
+    <div class="logo__wrapper">
+      <div>
+        <img src="../../assets/philosophy.png" alt="philosophy">
+      </div>
+      <div>
+        <img src="../../assets/league.png" alt="league">
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLogged" class="buttons__wrapper">
+    <a>All meetups</a>
+    <a>My meetups</a>
+    <a *ngIf="isAdmin">Users</a>
+  </div>
+</nav>
