@@ -32,7 +32,7 @@
 }
 .login__buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .login__register {
@@ -70,4 +70,11 @@ input.ng-touched.ng-invalid {
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
   color: red;
+}
+button:disabled,
+button[disabled] {
+  cursor: default;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

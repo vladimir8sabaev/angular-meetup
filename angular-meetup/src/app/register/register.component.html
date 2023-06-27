@@ -13,8 +13,15 @@
       fio must exist
     </span>
     <div class="login__buttons">
-      <button class="login__button" type="submit" (click)="register()">Register</button>
+      <button class="login__button" type="button" (click)="goToLoginPage()">Back to Login page</button>
+      <button disabled
+        *ngIf="!registerForm.get('password')?.valid || !registerForm.get('email')?.valid || !registerForm.get('fio')?.valid"
+        class="login__button" type="submit" (click)="register()">Register</button>
+      <button
+        *ngIf="registerForm.get('password')?.valid && registerForm.get('email')?.valid && registerForm.get('fio')?.valid"
+        class="login__button" type="submit" (click)="register()">Register</button>
     </div>
+
     <span class="login__error" *ngIf="!isAvailable">
       This email/password pair is already exist
     </span>

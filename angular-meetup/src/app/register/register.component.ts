@@ -47,4 +47,7 @@ export class RegisterComponent {
       )
       .subscribe((data) => console.log(data));
   }
+  goToLoginPage() {
+    this.authService.goToLoginPage();
+  }
 }

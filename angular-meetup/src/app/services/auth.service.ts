@@ -62,6 +62,9 @@ export class AuthService {
   goToRegisterPage() {
     this.routes.navigate(['register']);
   }
+  goToLoginPage() {
+    this.routes.navigate(['login']);
+  }
   register(email: string | null, password: string | null, fio: string | null) {
     return this.http.post<User>(`${this.baseUrl}/registration`, {
       email: email,
