@@ -1,0 +1,74 @@
+<mat-card class="meetup__card">
+  <mat-card-content>
+    <div class="flex__wrapper">
+      <div class="title__wrapper">
+        <div class="meetup__title">Title: {{meetup.name}}</div>
+        <div class="meetup__sub">Subscribers: {{meetup.users.length}}</div>
+      </div>
+      <div class="time__wrapper">
+        <div class="meetup__date">{{meetup.time | date: 'dd.MM.yyyy'}},</div>
+        <div class="meetup__time">{{meetup.time | date: 'HH:mm'}}</div>
+      </div>
+    </div>
+    <div class="descr__wrapper">
+      <div class="meetup__descr">{{meetup.description}}</div>
+      <div class="meetup__location">Place: {{meetup.location}}</div>
+    </div>
+
+    <div [@bodyExpansion]="state" class="expandable-content">
+      <div class="extendable__wrapper">
+        <div class="meetup__water">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, harum dignissimos
+          error placeat quia necessitatibus ullam suscipit, numquam deserunt modi delectus amet nam? Adipisci itaque
+          provident cupiditate, maxime deserunt ipsum optio, sequi hic id necessitatibus ratione repellendus modi facere
+          repudiandae asperiores consequatur? Ipsum iure obcaecati animi nobis repellendus enim ducimus odio harum ea
+          suscipit quibusdam quia repudiandae consequatur, accusamus autem cumque veritatis. Totam facere quam dolore
+          consectetur pariatur esse. Explicabo, sapiente? Debitis alias quasi, pariatur quo nihil saepe suscipit
+          accusamus
+          optio vero veritatis et deserunt neque sunt earum a? Alias nostrum vitae minima possimus deserunt accusantium
+          dolore fugit aut nobis?
+        </div>
+        <div class="meetup__subtitle">
+          Target audience:
+        </div>
+        <div class="meetup__target">
+          {{meetup.target_audience || 'all'}}
+        </div>
+        <div class="meetup__subtitle">
+          Need to know:
+        </div>
+        <div class="meetup__target">
+          {{meetup.need_to_know || 'all'}}
+        </div>
+        <div class="meetup__subtitle">
+          What will happen?
+        </div>
+        <div class="meetup__target">
+          {{meetup.will_happen || 'all'}}
+        </div>
+        <div class="meetup__subtitle">
+          Why should you come?
+        </div>
+        <div class="meetup__target">
+          {{meetup.reason_to_come || 'all'}}
+        </div>
+        <div class="author__wrapper">
+          <img src="../../assets/person.svg" alt="person">
+          <div class="meetup__target">
+            {{ meetup.owner.email}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="meetup__btn__wrapper">
+    <button class="meetup__go">I will come!</button>
+
+    <button class="meetup__expand" (click)="toggle()">
+      <img *ngIf="state === 'collapsed'" src="../../assets/arrow-down.png" alt="arrow">
+      <img *ngIf="state === 'expanded'" src="../../assets/arrow-up.png" alt="arrow">
+    </button>
+  </mat-card-actions>
+
+</mat-card>

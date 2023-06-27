@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { User } from '../Interfaces/user';
+import { Meetup } from '../Interfaces/meetup';
 @Injectable({
   providedIn: 'root',
 })
@@ -75,5 +76,8 @@ export class AuthService {
 
   getUsers() {
     return this.http.get<User[]>(`${environment.backendOrigin}/user`);
+  }
+  getMeetups() {
+    return this.http.get<Meetup[]>(`${environment.backendOrigin}/meetup`);
   }
 }

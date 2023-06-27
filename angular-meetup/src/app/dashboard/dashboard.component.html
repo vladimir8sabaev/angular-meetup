@@ -1,1 +1,5 @@
-<button (click)="getUsers()">"nj ryjgrf</button>
+<div class="meetup__wrapper">
+  <div *ngFor="let meetup of allMeetups">
+    <app-meetup [meetup]="meetup"></app-meetup>
+  </div>
+</div>
