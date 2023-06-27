@@ -72,4 +72,8 @@ export class AuthService {
       fio: fio,
     });
   }
+
+  getUsers() {
+    return this.http.get<User[]>(`${environment.backendOrigin}/user`);
+  }
 }
