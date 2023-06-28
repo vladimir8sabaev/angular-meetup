@@ -17,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     RegisterComponent,
     MeetupComponent,
     NavbarComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

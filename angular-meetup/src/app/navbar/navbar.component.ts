@@ -21,4 +21,7 @@ export class NavbarComponent {
   logout() {
     this.authService.logout();
   }
+  admin() {
+    this.authService.goToAdminPage();
+  }
 }

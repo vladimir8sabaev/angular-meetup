@@ -95,6 +95,9 @@ export class AuthService {
   goToLoginPage() {
     this.routes.navigate(['login']);
   }
+  goToAdminPage() {
+    this.routes.navigate(['admin']);
+  }
 
   //! register
 
@@ -129,6 +132,7 @@ export class AuthService {
         })
       );
   }
+  //! unsubscribe from meetup
 
   cancelSubscribeOnMeetup(meetupId: number, userId: number | undefined) {
     return this.http
