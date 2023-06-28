@@ -132,7 +132,7 @@ export class AuthService {
 
   cancelSubscribeOnMeetup(meetupId: number, userId: number | undefined) {
     return this.http
-      .request('delete', `${environment.backendOrigin}/meetup`, {
+      .delete(`${environment.backendOrigin}/meetup`, {
         body: {
           idMeetup: meetupId,
           idUser: userId,
