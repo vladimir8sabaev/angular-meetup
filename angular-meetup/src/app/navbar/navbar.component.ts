@@ -8,9 +8,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent {
   constructor(private authService: AuthService) {}
-  isAdmin: boolean = false;
-  isLogged: boolean = false;
-
+  isAdmin: boolean = Boolean(localStorage.getItem('isAdmin')) || false;
+  isLogged: boolean = Boolean(localStorage.getItem('isLogged')) || false;
   ngOnInit() {
     this.authService.isLogged.subscribe((data) => {
       this.isLogged = data;
@@ -18,5 +17,8 @@ export class NavbarComponent {
     this.authService.isAdmin.subscribe((data) => {
       this.isAdmin = data;
     });
+  }
+  logout() {
+    this.authService.logout();
   }
 }

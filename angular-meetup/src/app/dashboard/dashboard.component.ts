@@ -21,5 +21,9 @@ export class DashboardComponent {
   }
   ngOnInit() {
     this.getMeetups();
+    this.authService.refresh.subscribe(() => {
+      this.getMeetups();
+    });
+    console.log(this.authService.user?.roles[0].name);
   }
 }

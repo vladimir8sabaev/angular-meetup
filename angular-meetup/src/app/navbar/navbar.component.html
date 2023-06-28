@@ -17,4 +17,8 @@
     <a>My meetups</a>
     <a *ngIf="isAdmin">Users</a>
   </div>
+  <div *ngIf="isLogged" class="icons__wrapper">
+    <div class="icon"><img src="../../assets/settings.svg" alt="settings"></div>
+    <div class="icon" (click)="logout()"><img src="../../assets/logout.svg" alt="logout"></div>
+  </div>
 </nav>

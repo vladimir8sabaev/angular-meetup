@@ -7,7 +7,8 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-
+import { AuthService } from '../services/auth.service';
+import { User } from '../Interfaces/user';
 @Component({
   selector: 'app-meetup',
   templateUrl: './meetup.component.html',
@@ -24,10 +25,17 @@ import {
   ],
 })
 export class MeetupComponent {
-  constructor() {}
+  constructor(private authService: AuthService) {}
   @Input() meetup: Meetup;
   state = 'collapsed';
   toggle(): void {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
+  }
+  subscribeOnMeetup() {
+    if (this.authService.user) {
+      this.authService
+        .subscribeOnMeetup(this.meetup.id, this.authService.user.id)
+        .subscribe((data) => console.log(data));
+    }
   }
 }
