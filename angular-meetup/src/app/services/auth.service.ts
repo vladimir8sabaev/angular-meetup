@@ -130,6 +130,21 @@ export class AuthService {
       );
   }
 
+  cancelSubscribeOnMeetup(meetupId: number, userId: number | undefined) {
+    return this.http
+      .request('delete', `${environment.backendOrigin}/meetup`, {
+        body: {
+          idMeetup: meetupId,
+          idUser: userId,
+        },
+      })
+      .pipe(
+        tap(() => {
+          this.refresh.next();
+        })
+      );
+  }
+
   //! refresh
 
   private _refresh = new Subject<void>();

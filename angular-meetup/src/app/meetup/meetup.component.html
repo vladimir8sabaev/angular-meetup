@@ -63,8 +63,9 @@
   </mat-card-content>
 
   <mat-card-actions class="meetup__btn__wrapper">
-    <button class="meetup__go" (click)="subscribeOnMeetup()">I will come!</button>
-
+    <button *ngIf="!isSub" class="meetup__go" (click)="subscribeOnMeetup()">I will come!</button>
+    <button *ngIf="isSub" class="meetup__go meetup__go-cancel" (click)="cancelSubscribeOnMeetup()">I will not
+      come</button>
     <button class="meetup__expand" (click)="toggle()">
       <img *ngIf="state === 'collapsed'" src="../../assets/arrow-down.png" alt="arrow">
       <img *ngIf="state === 'expanded'" src="../../assets/arrow-up.png" alt="arrow">

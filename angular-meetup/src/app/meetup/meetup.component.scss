@@ -64,6 +64,10 @@
   border-radius: 5px;
   background: var(--secondary-color, #4c3f78);
   box-shadow: 0px 4px 4px 0px rgba(62, 5, 4, 0.25);
+  &-cancel {
+    background: var(--primary-color, #b4b4c0);
+    color: var(--secondary-color, #4c3f78);
+  }
 }
 .meetup__btn__wrapper {
   justify-content: end;

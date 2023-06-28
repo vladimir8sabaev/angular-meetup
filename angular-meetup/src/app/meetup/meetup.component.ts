@@ -28,6 +28,7 @@ export class MeetupComponent {
   constructor(private authService: AuthService) {}
   @Input() meetup: Meetup;
   state = 'collapsed';
+  isSub: boolean = false;
   toggle(): void {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
   }
@@ -37,5 +38,23 @@ export class MeetupComponent {
         .subscribeOnMeetup(this.meetup.id, this.authService.user.id)
         .subscribe((data) => console.log(data));
     }
+  }
+  cancelSubscribeOnMeetup() {
+    if (this.authService.user) {
+      this.authService
+        .cancelSubscribeOnMeetup(this.meetup.id, this.authService.user.id)
+        .subscribe((data) => console.log(data));
+    }
+  }
+  ngOnInit() {
+    if (
+      this.meetup.users.filter((item) => {
+        return item.id === this.authService.user?.id;
+      }).length > 0
+    ) {
+      this.isSub = true;
+    }
+
+    console.log(this.authService.user?.id);
   }
 }
