@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +20,7 @@ export class LoginComponent {
     email: FormControl<string | null>;
     password: FormControl<string | null>;
   }>;
+  message: string;
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit() {
     this.initForm();
@@ -24,15 +28,8 @@ export class LoginComponent {
   isRegistered: boolean = true;
   initForm() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          // Validators.minLength(6),
-          // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
-        ],
-      ],
+      email: ['', [Validators.required, Validators.email], this.emailValidator],
+      password: ['', [Validators.required]],
     });
     this.loginForm.valueChanges.subscribe(() => (this.isRegistered = true));
   }
@@ -44,13 +41,25 @@ export class LoginComponent {
       )
       .subscribe(
         (data) => console.log(data),
-        (error) => {
-          console.log(error.message);
+        (error: HttpErrorResponse) => {
+          this.message = error.error.message;
           this.isRegistered = false;
         }
       );
   }
   goToRegisterPage() {
     this.authService.goToRegisterPage();
+  }
+  emailValidator(control: AbstractControl): Promise<any> | Observable<any> {
+    const res = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'aboba@mail.ru') {
+          resolve({ emailValidator: true });
+        } else {
+          resolve(null);
+        }
+      }, 3000);
+    });
+    return res;
   }
 }
