@@ -28,7 +28,7 @@ export class LoginComponent {
   isRegistered: boolean = true;
   initForm() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email], this.emailValidator],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
     this.loginForm.valueChanges.subscribe(() => (this.isRegistered = true));
@@ -49,17 +49,5 @@ export class LoginComponent {
   }
   goToRegisterPage() {
     this.authService.goToRegisterPage();
-  }
-  emailValidator(control: AbstractControl): Promise<any> | Observable<any> {
-    const res = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (control.value === 'aboba@mail.ru') {
-          resolve({ emailValidator: true });
-        } else {
-          resolve(null);
-        }
-      }, 3000);
-    });
-    return res;
   }
 }

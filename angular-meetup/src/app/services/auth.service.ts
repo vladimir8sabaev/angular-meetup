@@ -167,15 +167,20 @@ export class AuthService {
       );
   }
 
-  editUserRole(user: User) {
-    return this.http.post(`${environment.backendOrigin}/user/role`, {}).pipe(
-      tap(() => {
-        this.refresh.next();
-      })
-    );
-  }
+  editUserRole(user: User) {}
 
-  editUserData(user: User) {}
+  editUserData(id: number, email: string, password?: string) {
+    if (password) {
+      return this.http.put(`${environment.backendOrigin}/user/${id}`, {
+        email: email,
+        password: password,
+      });
+    } else {
+      return this.http.put(`${environment.backendOrigin}/user/${id}`, {
+        email: email,
+      });
+    }
+  }
 
   //! refresh
 

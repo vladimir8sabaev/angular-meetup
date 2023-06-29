@@ -31,6 +31,23 @@ export class UserComponent {
     this.userForm.get('role')?.enable();
   }
   saveChangedUser() {
+    this.user.email = this.userForm.value.email || this.user.email;
+
+    if (this.userForm.value.password) {
+      this.user.password = this.userForm.value.password;
+      if (this.user.id && this.user.email && this.user.password) {
+        this.authService
+          .editUserData(this.user.id, this.user.email, this.user.password)
+          .subscribe((data) => console.log(data));
+      }
+    } else {
+      if (this.user.id && this.user.email) {
+        this.authService
+          .editUserData(this.user.id, this.user.email)
+          .subscribe((data) => console.log(data));
+      }
+    }
+
     this.isEdited = false;
     this.userForm.get('email')?.disable();
     this.userForm.get('password')?.disable();
@@ -46,10 +63,7 @@ export class UserComponent {
         { value: `${this.user.email}`, disabled: true },
         [Validators.required, Validators.email],
       ],
-      password: [
-        { value: `${this.user.password}`, disabled: true },
-        [Validators.required],
-      ],
+      password: [{ value: '', disabled: true }, [Validators.required]],
       role: [{ value: '', disabled: true }, [Validators.required]],
     });
   }
