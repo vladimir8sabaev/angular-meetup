@@ -7,6 +7,7 @@ import { User } from '../Interfaces/user';
 import { Meetup } from '../Interfaces/meetup';
 import { Observable, Subject } from 'rxjs';
 import { Subscribe } from '../Interfaces/subscribe';
+import { Role } from '../Interfaces/role';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,6 +16,8 @@ export class AuthService {
   public isLogged = new Subject<boolean>();
   baseUrl: string = `${environment.backendOrigin}/auth`;
   constructor(private http: HttpClient, private routes: Router) {}
+
+  public allroles: Role[] = [];
 
   //! login
 
@@ -117,6 +120,9 @@ export class AuthService {
   getMeetups(): Observable<Meetup[]> {
     return this.http.get<Meetup[]>(`${environment.backendOrigin}/meetup`);
   }
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(`${environment.backendOrigin}/role`);
+  }
 
   //! subscribe on meetup
 
@@ -148,6 +154,28 @@ export class AuthService {
         })
       );
   }
+
+  //! delete / edit user
+
+  deleteUser(user: User) {
+    return this.http
+      .delete(`${environment.backendOrigin}/user/${user.id}`)
+      .pipe(
+        tap(() => {
+          this.refresh.next();
+        })
+      );
+  }
+
+  editUserRole(user: User) {
+    return this.http.post(`${environment.backendOrigin}/user/role`, {}).pipe(
+      tap(() => {
+        this.refresh.next();
+      })
+    );
+  }
+
+  editUserData(user: User) {}
 
   //! refresh
 

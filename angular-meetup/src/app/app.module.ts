@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdminComponent } from './admin/admin.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AdminComponent } from './admin/admin.component';
     MeetupComponent,
     NavbarComponent,
     AdminComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

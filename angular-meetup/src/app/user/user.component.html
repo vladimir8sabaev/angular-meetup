@@ -1,0 +1,21 @@
+<form class="user__form" [formGroup]="userForm">
+  <div class="input__wrapper">
+    <input type="text" value="{{user.email}}" formControlName="email" />
+  </div>
+  <div class="input__wrapper">
+    <input type="password" value="{{user.password}}" formControlName="password" />
+  </div>
+  <div class="input__wrapper input__wrapper-compact">
+    <select formControlName="role">
+      <option value="" disabled selected hidden>{{user.roles[0].name}}</option>
+      <option *ngFor="let role of allRoles" value="{{role.name}}">{{role.name}}</option>
+    </select>
+  </div>
+  <div class="input__wrapper input__wrapper-compact">
+    <button (click)="saveChangedUser()" *ngIf="isEdited" type="submit"><img src="../../assets/check.svg"
+        alt="edit"></button>
+    <button (click)="changeUser()" *ngIf="!isEdited"><img src="../../assets/edit.svg" alt="edit"></button>
+    <button (click)="deleteUser(user)"><img src="../../assets/cross.svg" alt="delete"></button>
+  </div>
+
+</form>

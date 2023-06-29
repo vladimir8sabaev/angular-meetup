@@ -1,1 +1,5 @@
-<p>admin works!</p>
+<div class="admin__wrapper">
+  <div *ngFor="let user of allUsers">
+    <app-user [user]="user"></app-user>
+  </div>
+</div>
