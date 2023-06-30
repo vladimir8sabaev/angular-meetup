@@ -1,0 +1,96 @@
+<form class="meetup__form" [formGroup]="meetupForm">
+  <div class="input__wrapper">
+    <label for="name">Title of meetup:</label>
+    <input class="meetup__form__input" type="text" formControlName="name" id="name">
+  </div>
+
+  <span class="meetup__error" *ngIf="!meetupForm.get('name')?.valid && meetupForm.get('name')?.touched">Enter
+    title of meetup!</span>
+
+  <div class="input__wrapper">
+    <label for="date">Date:</label>
+    <input class="meetup__form__input" type="date" value="2023-07-04" min="2023-07-04" max="2023-12-31"
+      formControlName="date" id="date">
+  </div>
+
+  <span class="meetup__error" *ngIf="!meetupForm.get('date')?.valid && meetupForm.get('date')?.touched">Enter
+    date!</span>
+
+  <div class="input__wrapper">
+    <label for="time">Time:</label>
+    <input class="meetup__form__input" type="time" formControlName="time" id="time">
+  </div>
+
+  <span class="meetup__error" *ngIf="!meetupForm.get('time')?.valid && meetupForm.get('time')?.touched">Enter
+    time!</span>
+
+  <div class="input__wrapper">
+    <label for="duration">Duration:</label>
+    <input class="meetup__form__input" type="number" formControlName="duration" id="duration">
+  </div>
+
+  <span class="meetup__error" *ngIf="!meetupForm.get('duration')?.valid && meetupForm.get('duration')?.touched">Enter
+    duration!</span>
+
+  <div class="input__wrapper">
+    <label for="location">Location:</label>
+    <input class="meetup__form__input" type="text" formControlName="location" id="location">
+  </div>
+
+  <span class="meetup__error" *ngIf="!meetupForm.get('location')?.valid && meetupForm.get('location')?.touched">Enter
+    location!</span>
+
+  <div class="input__wrapper">
+    <label for="description">Description:</label>
+    <input class="meetup__form__input" type="text" formControlName="description" id="description">
+  </div>
+
+  <span class="meetup__error"
+    *ngIf="!meetupForm.get('description')?.valid && meetupForm.get('description')?.touched">Enter
+    description!</span>
+
+  <div class="input__wrapper">
+    <label for="target_audience">Tagret audience:</label>
+    <input class="meetup__form__input" type="text" formControlName="target_audience" id=" target_audience">
+  </div>
+
+  <span class="meetup__error"
+    *ngIf="!meetupForm.get('target_audience')?.valid && meetupForm.get('target_audience')?.touched">Enter
+    target audience!</span>
+
+  <div class="input__wrapper">
+    <label for="need_to_know">Need to know:</label>
+    <input class="meetup__form__input" type="text" formControlName="need_to_know" id=" need_to_know">
+  </div>
+
+  <span class="meetup__error"
+    *ngIf="!meetupForm.get('need_to_know')?.valid && meetupForm.get('need_to_know')?.touched">Enter
+    knowledges!</span>
+
+  <div class="input__wrapper">
+    <label for="will_happen">Will happen:</label>
+    <input class="meetup__form__input" type="text" formControlName="will_happen" id="will_happen">
+  </div>
+
+  <span class="meetup__error"
+    *ngIf="!meetupForm.get('will_happen')?.valid && meetupForm.get('will_happen')?.touched">Enter
+    what will happen!</span>
+
+  <div class="input__wrapper">
+    <label for=" reason_to_come">Reasons to come:</label>
+    <input class="meetup__form__input" type="text" formControlName="reason_to_come" id=" reason_to_come">
+  </div>
+
+  <span class="meetup__error"
+    *ngIf="!meetupForm.get('reason_to_come')?.valid && meetupForm.get('reason_to_come')?.touched">Enter
+    reason to come!</span>
+
+  <button class="meetup__form__submit" disabled
+    *ngIf="!meetupForm.get('name')?.valid || !meetupForm.get('date')?.valid || !meetupForm.get('time')?.valid
+    || !meetupForm.get('duration')?.valid || !meetupForm.get('location')?.valid || !meetupForm.get('description')?.valid || !meetupForm.get('target_audience')?.valid || !meetupForm.get('need_to_know')?.valid || !meetupForm.get('will_happen')?.valid || !meetupForm.get('reason_to_come')?.valid"
+    type="submit">Save meetup</button>
+  <button (click)="createMeetup()"
+    *ngIf="meetupForm.get('name')?.valid && meetupForm.get('date')?.valid && meetupForm.get('time')?.valid
+  && meetupForm.get('duration')?.valid && meetupForm.get('location')?.valid && meetupForm.get('description')?.valid && meetupForm.get('target_audience')?.valid && meetupForm.get('need_to_know')?.valid && meetupForm.get('will_happen')?.valid && meetupForm.get('reason_to_come')?.valid"
+    class="meetup__form__submit" type="submit">Save meetup</button>
+</form>

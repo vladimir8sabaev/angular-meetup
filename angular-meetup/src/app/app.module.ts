@@ -19,6 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
+import { MeetupformComponent } from './meetupform/meetupform.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UserComponent } from './user/user.component';
     NavbarComponent,
     AdminComponent,
     UserComponent,
+    MeetupformComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,4 +24,7 @@ export class DashboardComponent {
       this.getMeetups();
     });
   }
+  addNew() {
+    this.authService.goToAddNewMeetup();
+  }
 }

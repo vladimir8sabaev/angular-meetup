@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { loginGuard } from './guards/login.guard';
 import { AdminComponent } from './admin/admin.component';
 import { adminGuard } from './guards/admin.guard';
+import { MeetupformComponent } from './meetupform/meetupform.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,6 +18,11 @@ const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent, canActivate: [adminGuard] },
+  {
+    path: 'meetupform',
+    component: MeetupformComponent,
+    canActivate: [loginGuard],
+  },
 ];
 
 @NgModule({

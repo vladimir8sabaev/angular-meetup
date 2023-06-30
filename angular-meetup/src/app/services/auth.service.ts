@@ -127,6 +127,9 @@ export class AuthService {
     this.routes.navigate(['dashboard']);
   }
 
+  goToAddNewMeetup() {
+    this.routes.navigate(['meetupform']);
+  }
   //! register
 
   register(email: string | null, password: string | null, fio: string | null) {
@@ -188,6 +191,34 @@ export class AuthService {
           this.refresh.next();
         })
       );
+  }
+
+  //! create meetup
+
+  createMeetup(
+    name: string | null,
+    date: string | null,
+    time: string | null,
+    duration: string | null,
+    location: string | null,
+    description: string | null,
+    target_audience: string | null,
+    need_to_know: string | null,
+    will_happen: string | null,
+    reason_to_come: string | null
+  ) {
+    const isoDate: string = new Date(date + ' ' + time).toISOString();
+    return this.http.post(`${environment.backendOrigin}/meetup`, {
+      name: name,
+      description: description,
+      time: isoDate,
+      duration: duration,
+      location: location,
+      target_audience: target_audience,
+      need_to_know: need_to_know,
+      will_happen: will_happen,
+      reason_to_come: reason_to_come,
+    });
   }
 
   //! delete / edit user
