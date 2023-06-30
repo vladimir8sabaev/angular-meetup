@@ -68,6 +68,9 @@
     background: var(--primary-color, #b4b4c0);
     color: var(--secondary-color, #4c3f78);
   }
+  &-edit {
+    background: yellowgreen;
+  }
 }
 .meetup__btn__wrapper {
   justify-content: end;

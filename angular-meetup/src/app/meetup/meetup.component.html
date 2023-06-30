@@ -63,6 +63,8 @@
   </mat-card-content>
 
   <mat-card-actions class="meetup__btn__wrapper">
+    <button *ngIf="checkOwner()" class="meetup__go meetup__go-edit" (click)="editMeetup(meetup)"> Edit
+    </button>
     <button *ngIf="!isSub" class="meetup__go" (click)="subscribeOnMeetup()">I will come!</button>
     <button *ngIf="isSub" class="meetup__go meetup__go-cancel" (click)="cancelSubscribeOnMeetup()">I will not
       come</button>

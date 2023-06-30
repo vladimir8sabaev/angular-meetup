@@ -9,8 +9,7 @@
 
   <div class="input__wrapper">
     <label for="date">Date:</label>
-    <input class="meetup__form__input" type="date" value="2023-07-04" min="2023-07-04" max="2023-12-31"
-      formControlName="date" id="date">
+    <input class="meetup__form__input" type="date" value="2023-07-04" formControlName="date" id="date">
   </div>
 
   <span class="meetup__error" *ngIf="!meetupForm.get('date')?.valid && meetupForm.get('date')?.touched">Enter
@@ -85,12 +84,31 @@
     *ngIf="!meetupForm.get('reason_to_come')?.valid && meetupForm.get('reason_to_come')?.touched">Enter
     reason to come!</span>
 
-  <button class="meetup__form__submit" disabled
-    *ngIf="!meetupForm.get('name')?.valid || !meetupForm.get('date')?.valid || !meetupForm.get('time')?.valid
-    || !meetupForm.get('duration')?.valid || !meetupForm.get('location')?.valid || !meetupForm.get('description')?.valid || !meetupForm.get('target_audience')?.valid || !meetupForm.get('need_to_know')?.valid || !meetupForm.get('will_happen')?.valid || !meetupForm.get('reason_to_come')?.valid"
-    type="submit">Save meetup</button>
-  <button (click)="createMeetup()"
-    *ngIf="meetupForm.get('name')?.valid && meetupForm.get('date')?.valid && meetupForm.get('time')?.valid
-  && meetupForm.get('duration')?.valid && meetupForm.get('location')?.valid && meetupForm.get('description')?.valid && meetupForm.get('target_audience')?.valid && meetupForm.get('need_to_know')?.valid && meetupForm.get('will_happen')?.valid && meetupForm.get('reason_to_come')?.valid"
-    class="meetup__form__submit" type="submit">Save meetup</button>
+  <div class="button__wrapper">
+
+    <button *ngIf="authService.isEdited" class="meetup__form__submit delete">Delete</button>
+
+    <button class="meetup__form__submit cancel" type="button" (click)="cancelCreation()">Cancel</button>
+
+    <button class="meetup__form__submit" disabled
+      *ngIf="!authService.isEdited && (!meetupForm.get('name')?.valid || !meetupForm.get('date')?.valid || !meetupForm.get('time')?.valid
+  || !meetupForm.get('duration')?.valid || !meetupForm.get('location')?.valid || !meetupForm.get('description')?.valid || !meetupForm.get('target_audience')?.valid || !meetupForm.get('need_to_know')?.valid || !meetupForm.get('will_happen')?.valid || !meetupForm.get('reason_to_come')?.valid)"
+      type="submit">Save meetup</button>
+
+    <button (click)="createMeetup()"
+      *ngIf=" !authService.isEdited && meetupForm.get('name')?.valid && meetupForm.get('date')?.valid && meetupForm.get('time')?.valid
+&& meetupForm.get('duration')?.valid && meetupForm.get('location')?.valid && meetupForm.get('description')?.valid && meetupForm.get('target_audience')?.valid && meetupForm.get('need_to_know')?.valid && meetupForm.get('will_happen')?.valid && meetupForm.get('reason_to_come')?.valid"
+      class="meetup__form__submit" type="submit">Save meetup</button>
+
+    <button class="meetup__form__submit" disabled
+      *ngIf="authService.isEdited && (!meetupForm.get('name')?.valid || !meetupForm.get('date')?.valid || !meetupForm.get('time')?.valid
+  || !meetupForm.get('duration')?.valid || !meetupForm.get('location')?.valid || !meetupForm.get('description')?.valid || !meetupForm.get('target_audience')?.valid || !meetupForm.get('need_to_know')?.valid || !meetupForm.get('will_happen')?.valid || !meetupForm.get('reason_to_come')?.valid)"
+      type="submit">Save changes</button>
+
+    <button (click)="saveChanges()"
+      *ngIf=" authService.isEdited && meetupForm.get('name')?.valid && meetupForm.get('date')?.valid && meetupForm.get('time')?.valid
+&& meetupForm.get('duration')?.valid && meetupForm.get('location')?.valid && meetupForm.get('description')?.valid && meetupForm.get('target_audience')?.valid && meetupForm.get('need_to_know')?.valid && meetupForm.get('will_happen')?.valid && meetupForm.get('reason_to_come')?.valid"
+      class="meetup__form__submit" type="submit"> Save changes </button>
+
+  </div>
 </form>

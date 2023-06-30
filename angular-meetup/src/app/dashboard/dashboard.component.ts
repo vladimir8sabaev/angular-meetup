@@ -25,6 +25,8 @@ export class DashboardComponent {
     });
   }
   addNew() {
+    this.authService.isEdited = false;
+    this.authService.editedMeetup = null;
     this.authService.goToAddNewMeetup();
   }
 }

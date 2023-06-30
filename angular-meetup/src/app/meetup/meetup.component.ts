@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Meetup } from '../Interfaces/meetup';
 import {
   trigger,
@@ -45,6 +45,14 @@ export class MeetupComponent {
         .cancelSubscribeOnMeetup(this.meetup.id, this.authService.user.id)
         .subscribe((data) => console.log(data));
     }
+  }
+  checkOwner() {
+    return this.meetup.owner.id === this.authService.user?.id;
+  }
+  editMeetup(meetup: Meetup) {
+    this.authService.editedMeetup = meetup;
+    console.log(meetup);
+    this.authService.editMeetup();
   }
   ngOnInit() {
     if (

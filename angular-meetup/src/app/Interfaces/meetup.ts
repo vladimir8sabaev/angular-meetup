@@ -13,10 +13,10 @@ export interface Meetup {
   duration: number;
   createdBy: 1;
   owner: {
-    id: 1;
-    email: 'pam@dundermifflin.com';
-    password: 'password';
-    fio: 'password';
+    id: number;
+    email: string;
+    password: string;
+    fio: string;
   };
   users: User[];
 }

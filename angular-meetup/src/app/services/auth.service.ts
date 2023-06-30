@@ -24,6 +24,10 @@ export class AuthService {
   public allMeetups: Meetup[] = [];
   public filteredMeetups: Meetup[] = [];
 
+  public editedMeetup: Meetup | null;
+
+  public isEdited: boolean = false;
+
   openMyMeetups() {
     this.isFiltered = true;
   }
@@ -34,7 +38,6 @@ export class AuthService {
   filterMeetups(arr: Meetup[]): Meetup[] {
     return arr.filter((meetup: Meetup) => {
       if (this.user) {
-        console.log(this.user);
         return meetup.users.some((user) => user.email === this.user?.email);
       } else {
         return false;
@@ -128,6 +131,7 @@ export class AuthService {
   }
 
   goToAddNewMeetup() {
+    this.isEdited = false;
     this.routes.navigate(['meetupform']);
   }
   //! register
@@ -149,6 +153,7 @@ export class AuthService {
     this.http
       .get<Meetup[]>(`${environment.backendOrigin}/meetup`)
       .subscribe((data) => {
+        console.log(data);
         this.allMeetups = data;
         this.filteredMeetups = this.filterMeetups(data);
       });
@@ -221,6 +226,37 @@ export class AuthService {
     });
   }
 
+  editMeetup() {
+    this.isEdited = true;
+    this.routes.navigate(['meetupform']);
+  }
+
+  saveChanges(
+    id: number,
+    name: string | null,
+    date: string | null,
+    time: string | null,
+    duration: string | null,
+    location: string | null,
+    description: string | null,
+    target_audience: string | null,
+    need_to_know: string | null,
+    will_happen: string | null,
+    reason_to_come: string | null
+  ) {
+    const isoDate: string = new Date(date + ' ' + time).toISOString();
+    return this.http.put(`${environment.backendOrigin}/meetup/${id}`, {
+      name: name,
+      description: description,
+      time: isoDate,
+      duration: duration,
+      location: location,
+      target_audience: target_audience,
+      need_to_know: need_to_know,
+      will_happen: will_happen,
+      reason_to_come: reason_to_come,
+    });
+  }
   //! delete / edit user
 
   deleteUser(user: User) {
