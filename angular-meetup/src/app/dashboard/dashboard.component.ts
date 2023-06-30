@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Meetup } from '../Interfaces/meetup';
 import { User } from '../Interfaces/user';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,43 +10,18 @@ import { User } from '../Interfaces/user';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  constructor(private authService: AuthService) {}
-  allMeetups: Meetup[] = [];
-  filteredMeetups: Meetup[] = [];
+  constructor(public authService: AuthService) {}
   getUsers() {
     this.authService.getUsers().subscribe((data) => console.log(data));
   }
-  // filterMeetups(all: boolean): void {
-  //   if (all) {
-  //     this.filteredMeetups = [...this.allMeetups];
-  //   } else {
-  //     this.filteredMeetups = this.allMeetups.filter((meetup: Meetup) => {
-  //       if (this.authService.user) {
-  //         console.log(this.authService.user);
-  //         return meetup.users.some(
-  //           (user) => user.email === this.authService.user?.email
-  //         );
-  //       } else {
-  //         return false;
-  //       }
-  //     });
-  //   }
-  //   console.log(this.filteredMeetups);
-  // }
 
   getMeetups() {
-    this.authService.getMeetups().subscribe((data: Meetup[]) => {
-      this.allMeetups = data;
-      console.log(data);
-    });
+    this.authService.getMeetups();
   }
-
   ngOnInit() {
     this.getMeetups();
-    //this.filterMeetups(true);
     this.authService.refresh.subscribe(() => {
       this.getMeetups();
     });
-    console.log(this.authService.user?.roles[0].name);
   }
 }

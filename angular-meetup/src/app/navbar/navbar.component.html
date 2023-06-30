@@ -13,8 +13,8 @@
     </div>
   </div>
   <div *ngIf="isLogged" class="buttons__wrapper">
-    <a>All meetups</a>
-    <a>My meetups</a>
+    <a (click)="openAllMeetups()">All meetups</a>
+    <a (click)="openMyMeetups()">My meetups</a>
     <a *ngIf="isAdmin" (click)="admin()">Users</a>
   </div>
   <div *ngIf="isLogged" class="icons__wrapper">

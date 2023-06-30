@@ -16,8 +16,8 @@ import { Role } from '../Interfaces/role';
 })
 export class UserComponent {
   isEdited: boolean = false;
-  allRoles: Role[] = [];
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  //allRoles: Role[] = [];
+  constructor(private fb: FormBuilder, public authService: AuthService) {}
   @Input() user: User;
   userForm!: FormGroup<{
     email: FormControl<string | null>;
@@ -32,7 +32,14 @@ export class UserComponent {
   }
   saveChangedUser() {
     this.user.email = this.userForm.value.email || this.user.email;
-
+    this.authService
+      .editUserRole(
+        this.userForm.value.role || this.user.roles[0].name,
+        this.user.id
+      )
+      .subscribe((data) => {
+        console.log(data);
+      });
     if (this.userForm.value.password) {
       this.user.password = this.userForm.value.password;
       if (this.user.id && this.user.email && this.user.password) {
@@ -54,10 +61,6 @@ export class UserComponent {
     this.userForm.get('role')?.disable();
   }
   initForm() {
-    this.authService.getRoles().subscribe((data) => {
-      this.allRoles = data;
-      console.log('all roles:', this.allRoles);
-    });
     this.userForm = this.fb.group({
       email: [
         { value: `${this.user.email}`, disabled: true },

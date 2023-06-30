@@ -1,5 +1,10 @@
-<div class="meetup__wrapper">
-  <div *ngFor="let meetup of allMeetups">
+<div *ngIf="!authService.isFiltered" class="meetup__wrapper">
+  <div *ngFor="let meetup of authService.allMeetups ">
+    <app-meetup [meetup]="meetup"></app-meetup>
+  </div>
+</div>
+<div *ngIf="authService.isFiltered" class="meetup__wrapper">
+  <div *ngFor="let meetup of authService.filteredMeetups ">
     <app-meetup [meetup]="meetup"></app-meetup>
   </div>
 </div>

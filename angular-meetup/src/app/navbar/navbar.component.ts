@@ -24,4 +24,15 @@ export class NavbarComponent {
   admin() {
     this.authService.goToAdminPage();
   }
+  dashboard() {
+    this.authService.goToDashboard();
+  }
+  openMyMeetups() {
+    this.dashboard();
+    this.authService.openMyMeetups();
+  }
+  openAllMeetups() {
+    this.dashboard();
+    this.authService.openAllMeetups();
+  }
 }

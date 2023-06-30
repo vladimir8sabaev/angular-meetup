@@ -9,14 +9,18 @@ import { User } from '../Interfaces/user';
 })
 export class AdminComponent {
   constructor(private authService: AuthService) {}
+
   allUsers: User[] = [];
+
   getUsers() {
     this.authService.getUsers().subscribe((data) => {
       this.allUsers = data;
       console.log(this.allUsers);
     });
   }
+
   ngOnInit() {
+    this.authService.getRoles();
     this.getUsers();
     this.authService.refresh.subscribe(() => {
       this.getUsers();

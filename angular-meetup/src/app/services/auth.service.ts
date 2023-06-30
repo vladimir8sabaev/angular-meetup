@@ -14,11 +14,33 @@ import { Role } from '../Interfaces/role';
 export class AuthService {
   public isAdmin = new Subject<boolean>();
   public isLogged = new Subject<boolean>();
+  public isFiltered: boolean = false;
+
   baseUrl: string = `${environment.backendOrigin}/auth`;
   constructor(private http: HttpClient, private routes: Router) {}
 
   public allroles: Role[] = [];
 
+  public allMeetups: Meetup[] = [];
+  public filteredMeetups: Meetup[] = [];
+
+  openMyMeetups() {
+    this.isFiltered = true;
+  }
+  openAllMeetups() {
+    this.isFiltered = false;
+  }
+
+  filterMeetups(arr: Meetup[]): Meetup[] {
+    return arr.filter((meetup: Meetup) => {
+      if (this.user) {
+        console.log(this.user);
+        return meetup.users.some((user) => user.email === this.user?.email);
+      } else {
+        return false;
+      }
+    });
+  }
   //! login
 
   login(email: string | null, password: string | null) {
@@ -101,6 +123,9 @@ export class AuthService {
   goToAdminPage() {
     this.routes.navigate(['admin']);
   }
+  goToDashboard() {
+    this.routes.navigate(['dashboard']);
+  }
 
   //! register
 
@@ -117,11 +142,20 @@ export class AuthService {
   getUsers() {
     return this.http.get<User[]>(`${environment.backendOrigin}/user`);
   }
-  getMeetups(): Observable<Meetup[]> {
-    return this.http.get<Meetup[]>(`${environment.backendOrigin}/meetup`);
+  getMeetups(): void {
+    this.http
+      .get<Meetup[]>(`${environment.backendOrigin}/meetup`)
+      .subscribe((data) => {
+        this.allMeetups = data;
+        this.filteredMeetups = this.filterMeetups(data);
+      });
   }
-  getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(`${environment.backendOrigin}/role`);
+  getRoles(): void {
+    this.http
+      .get<Role[]>(`${environment.backendOrigin}/role`)
+      .subscribe((data) => {
+        this.allroles = data;
+      });
   }
 
   //! subscribe on meetup
@@ -138,6 +172,7 @@ export class AuthService {
         })
       );
   }
+
   //! unsubscribe from meetup
 
   cancelSubscribeOnMeetup(meetupId: number, userId: number | undefined) {
@@ -167,7 +202,12 @@ export class AuthService {
       );
   }
 
-  editUserRole(user: User) {}
+  editUserRole(name: string, id?: number) {
+    return this.http.post(`${environment.backendOrigin}/user/role`, {
+      names: [name],
+      userId: id,
+    });
+  }
 
   editUserData(id: number, email: string, password?: string) {
     if (password) {
