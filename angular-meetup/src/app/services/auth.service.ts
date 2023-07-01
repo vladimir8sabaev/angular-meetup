@@ -198,7 +198,7 @@ export class AuthService {
       );
   }
 
-  //! create meetup
+  //! meetup
 
   createMeetup(
     name: string | null,
@@ -257,6 +257,11 @@ export class AuthService {
       reason_to_come: reason_to_come,
     });
   }
+
+  deleteMeetup(id: number) {
+    return this.http.delete(`${environment.backendOrigin}/meetup/${id}`);
+  }
+
   //! delete / edit user
 
   deleteUser(user: User) {

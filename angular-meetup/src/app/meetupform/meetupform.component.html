@@ -86,7 +86,7 @@
 
   <div class="button__wrapper">
 
-    <button *ngIf="authService.isEdited" class="meetup__form__submit delete">Delete</button>
+    <button *ngIf="authService.isEdited" class="meetup__form__submit delete" (click)="deleteMeetup()">Delete</button>
 
     <button class="meetup__form__submit cancel" type="button" (click)="cancelCreation()">Cancel</button>
 

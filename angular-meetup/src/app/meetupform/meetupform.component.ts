@@ -99,6 +99,8 @@ export class MeetupformComponent {
       .subscribe((data) => {
         console.log(data);
       });
+    alert('Meetup has been created!');
+    this.authService.goToDashboard();
   }
 
   saveChanges() {
@@ -119,11 +121,21 @@ export class MeetupformComponent {
       .subscribe((data) => {
         console.log(data);
       });
+    alert('Meetup has been changed!');
+    this.authService.goToDashboard();
   }
 
   cancelCreation() {
     this.authService.isEdited = false;
     this.meetupForm.reset();
+    this.authService.goToDashboard();
+  }
+
+  deleteMeetup() {
+    this.authService
+      .deleteMeetup(this.editedMeetup!.id)
+      .subscribe((data) => console.log(data));
+    alert('Meetup has been deleted!');
     this.authService.goToDashboard();
   }
 }
