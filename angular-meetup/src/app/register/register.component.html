@@ -22,8 +22,8 @@
         class="login__button" type="submit" (click)="register()">Register</button>
     </div>
 
-    <span class="login__error" *ngIf="!isAvailable">
-      This email/password pair is already exist
+    <span class="login__error" *ngIf="!isRegistered">
+      {{message}}
     </span>
   </form>
 </div>

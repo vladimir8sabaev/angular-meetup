@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,8 @@ export class RegisterComponent {
     fio: FormControl<string | null>;
   }>;
   isAvailable: boolean = true;
+  isRegistered: boolean = true;
+  message: string;
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit() {
     this.initForm();
@@ -36,7 +39,10 @@ export class RegisterComponent {
       ],
       fio: ['', [Validators.required]],
     });
-    this.registerForm.valueChanges.subscribe(() => (this.isAvailable = true));
+    this.registerForm.valueChanges.subscribe(() => {
+      this.isAvailable = true;
+      this.isRegistered = true;
+    });
   }
   register() {
     this.authService
@@ -45,7 +51,13 @@ export class RegisterComponent {
         this.registerForm.value.password || '',
         this.registerForm.value.fio || ''
       )
-      .subscribe((data) => console.log(data));
+      .subscribe(
+        (data) => console.log(data),
+        (error: HttpErrorResponse) => {
+          this.message = error.error.message;
+          this.isRegistered = false;
+        }
+      );
   }
   goToLoginPage() {
     this.authService.goToLoginPage();

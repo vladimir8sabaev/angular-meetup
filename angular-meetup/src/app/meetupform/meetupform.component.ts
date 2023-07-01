@@ -19,16 +19,16 @@ export class MeetupformComponent {
   editedMeetup: Meetup | null;
 
   meetupForm!: FormGroup<{
-    name: FormControl<string | null>;
-    date: FormControl<string | null>;
-    time: FormControl<string | null>;
-    duration: FormControl<string | null>;
-    location: FormControl<string | null>;
-    description: FormControl<string | null>;
-    target_audience: FormControl<string | null>;
-    need_to_know: FormControl<string | null>;
-    will_happen: FormControl<string | null>;
-    reason_to_come: FormControl<string | null>;
+    name: FormControl<string>;
+    date: FormControl<string>;
+    time: FormControl<string>;
+    duration: FormControl<string>;
+    location: FormControl<string>;
+    description: FormControl<string>;
+    target_audience: FormControl<string>;
+    need_to_know: FormControl<string>;
+    will_happen: FormControl<string>;
+    reason_to_come: FormControl<string>;
   }>;
 
   initForm() {
@@ -41,7 +41,7 @@ export class MeetupformComponent {
       finalTime = `${normalDate.getHours()}:${normalDate.getMinutes()}`;
     }
 
-    this.meetupForm = this.fb.group({
+    this.meetupForm = this.fb.nonNullable.group({
       name: [
         `${this.authService.editedMeetup?.name || ''}`,
         [Validators.required],

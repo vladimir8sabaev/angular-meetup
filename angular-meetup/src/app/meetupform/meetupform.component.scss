@@ -1,18 +1,30 @@
 .meetup__form {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 30px;
   width: 100vw;
+  margin: 30px auto;
+  max-width: 1300px;
   min-height: calc(100vh - 120px);
   padding: 20px 175px;
   border: 0.3px solid var(--primary-color, #b4b4c0);
   background: var(--default-color, #2c2c2c);
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+}
+.form__title {
+  color: var(--bold-color, #e9e9e9);
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 .input__wrapper {
   display: flex;
   width: 100%;
   column-gap: 40px;
+  justify-content: start;
   label {
+    display: block;
     width: 130px;
     color: var(--bold-color, #e9e9e9);
     font-family: "Open Sans", sans-serif;
@@ -23,6 +35,9 @@
     border-radius: 3px;
     border: 3px solid var(--secondary-color, #4c3f78);
     background-color: transparent;
+  }
+  &-special {
+    justify-content: end;
   }
 }
 .meetup__form__submit {
@@ -60,4 +75,35 @@ button[disabled] {
   display: flex;
   justify-content: end;
   column-gap: 20px;
+}
+.wide {
+  width: 100%;
+}
+textarea {
+  resize: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  padding-left: 10px;
+}
+input {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  padding-left: 10px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+.date__wrapper {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+.small {
+  width: 260px;
+}
+.medium {
+  width: 500px;
 }

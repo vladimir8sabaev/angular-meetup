@@ -1,5 +1,7 @@
-<app-search (inputChanged)="searchMeetup($event)"></app-search>
-<button class="newmeetup__btn" (click)="addNew()">Add new meetup</button>
+<div class="search__wrapper">
+  <app-search (inputChanged)="searchMeetup($event)"></app-search>
+  <button class="newmeetup__btn" (click)="addNew()">Add new meetup</button>
+</div>
 <div *ngIf="!authService.isFiltered" class="meetup__wrapper">
   <div *ngFor="let meetup of allMeetups ">
     <app-meetup [meetup]="meetup"

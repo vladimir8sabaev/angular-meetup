@@ -1,47 +1,65 @@
 <form class="meetup__form" [formGroup]="meetupForm">
+  <div class="form__title" *ngIf="!authService.isEdited">
+    Meetup creation
+  </div>
+  <div class="form__title" *ngIf="authService.isEdited">
+    Meetup edit
+  </div>
   <div class="input__wrapper">
-    <label for="name">Title of meetup:</label>
-    <input class="meetup__form__input" type="text" formControlName="name" id="name">
+    <div class="label__wrapper">
+      <label for="name">Title of meetup:</label>
+    </div>
+    <input class="meetup__form__input wide" type="text" formControlName="name" id="name">
   </div>
 
   <span class="meetup__error" *ngIf="!meetupForm.get('name')?.valid && meetupForm.get('name')?.touched">Enter
     title of meetup!</span>
 
-  <div class="input__wrapper">
-    <label for="date">Date:</label>
-    <input class="meetup__form__input" type="date" value="2023-07-04" formControlName="date" id="date">
-  </div>
+  <div class="date__wrapper">
+    <div class="input__wrapper">
+      <div class="label__wrapper">
+        <label for="date">Date:</label>
+      </div>
+      <input class="meetup__form__input small" type="date" value="2023-07-04" formControlName="date" id="date">
+    </div>
+    <div class="input__wrapper input__wrapper-special">
+      <div class="label__wrapper">
+        <label for="time">Time:</label>
+      </div>
 
+      <input class="meetup__form__input small" type="time" formControlName="time" id="time">
+    </div>
+  </div>
   <span class="meetup__error" *ngIf="!meetupForm.get('date')?.valid && meetupForm.get('date')?.touched">Enter
     date!</span>
-
-  <div class="input__wrapper">
-    <label for="time">Time:</label>
-    <input class="meetup__form__input" type="time" formControlName="time" id="time">
-  </div>
-
   <span class="meetup__error" *ngIf="!meetupForm.get('time')?.valid && meetupForm.get('time')?.touched">Enter
     time!</span>
 
-  <div class="input__wrapper">
-    <label for="duration">Duration:</label>
-    <input class="meetup__form__input" type="number" formControlName="duration" id="duration">
+  <div class="date__wrapper">
+    <div class="input__wrapper">
+      <div class="label__wrapper">
+        <label for="duration">Duration:</label>
+      </div>
+      <input class="meetup__form__input small" type="number" formControlName="duration" id="duration">
+    </div>
+    <div class="input__wrapper input__wrapper-special">
+      <div class="label__wrapper">
+        <label for="location">Location:</label>
+      </div>
+      <input class="meetup__form__input small" type="text" formControlName="location" id="location">
+    </div>
   </div>
-
   <span class="meetup__error" *ngIf="!meetupForm.get('duration')?.valid && meetupForm.get('duration')?.touched">Enter
     duration!</span>
-
-  <div class="input__wrapper">
-    <label for="location">Location:</label>
-    <input class="meetup__form__input" type="text" formControlName="location" id="location">
-  </div>
-
   <span class="meetup__error" *ngIf="!meetupForm.get('location')?.valid && meetupForm.get('location')?.touched">Enter
     location!</span>
 
   <div class="input__wrapper">
-    <label for="description">Description:</label>
-    <input class="meetup__form__input" type="text" formControlName="description" id="description">
+    <div class="label__wrapper">
+      <label for="description">Description:</label>
+    </div>
+    <textarea rows="4" class="meetup__form__input wide high" type="text" formControlName="description"
+      id="description"></textarea>
   </div>
 
   <span class="meetup__error"
@@ -49,8 +67,12 @@
     description!</span>
 
   <div class="input__wrapper">
-    <label for="target_audience">Tagret audience:</label>
-    <input class="meetup__form__input" type="text" formControlName="target_audience" id=" target_audience">
+    <div class="label__wrapper">
+      <label for="target_audience">Tagret audience:</label>
+    </div>
+
+    <textarea rows="3" class="meetup__form__input wide" type="text" formControlName="target_audience"
+      id=" target_audience"></textarea>
   </div>
 
   <span class="meetup__error"
@@ -58,8 +80,11 @@
     target audience!</span>
 
   <div class="input__wrapper">
-    <label for="need_to_know">Need to know:</label>
-    <input class="meetup__form__input" type="text" formControlName="need_to_know" id=" need_to_know">
+    <div class="label__wrapper">
+      <label for="need_to_know">Need to know:</label>
+    </div>
+    <textarea rows="5" class="meetup__form__input wide" type="text" formControlName="need_to_know"
+      id=" need_to_know"></textarea>
   </div>
 
   <span class="meetup__error"
@@ -67,8 +92,11 @@
     knowledges!</span>
 
   <div class="input__wrapper">
-    <label for="will_happen">Will happen:</label>
-    <input class="meetup__form__input" type="text" formControlName="will_happen" id="will_happen">
+    <div class="label__wrapper">
+      <label for="will_happen">Will happen:</label>
+    </div>
+    <textarea rows="5" class="meetup__form__input wide" type="text" formControlName="will_happen"
+      id="will_happen"></textarea>
   </div>
 
   <span class="meetup__error"
@@ -76,8 +104,11 @@
     what will happen!</span>
 
   <div class="input__wrapper">
-    <label for=" reason_to_come">Reasons to come:</label>
-    <input class="meetup__form__input" type="text" formControlName="reason_to_come" id=" reason_to_come">
+    <div class="label__wrapper">
+      <label for=" reason_to_come">Reasons to come:</label>
+    </div>
+    <textarea rows="3" class="meetup__form__input wide" type="text" formControlName="reason_to_come"
+      id=" reason_to_come"></textarea>
   </div>
 
   <span class="meetup__error"

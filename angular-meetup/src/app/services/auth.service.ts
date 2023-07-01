@@ -16,17 +16,15 @@ export class AuthService {
   public isLogged = new Subject<boolean>();
   public isFiltered: boolean = false;
   public isOnAdminPage: boolean = false;
-  baseUrl: string = `${environment.backendOrigin}/auth`;
-  constructor(private http: HttpClient, private routes: Router) {}
-
   public allroles: Role[] = [];
-
   public allMeetups: Meetup[] = [];
   public filteredMeetups: Meetup[] = [];
-
   public editedMeetup: Meetup | null;
-
   public isEdited: boolean = false;
+
+  baseUrl: string = `${environment.backendOrigin}/auth`;
+
+  constructor(private http: HttpClient, private routes: Router) {}
 
   openMyMeetups() {
     this.isFiltered = true;
@@ -44,6 +42,7 @@ export class AuthService {
       }
     });
   }
+
   //! login
 
   login(
@@ -152,13 +151,27 @@ export class AuthService {
     email: string | null,
     password: string | null,
     fio: string | null
-  ): Observable<User> {
+  ): Observable<{
+    token: string;
+  }> {
     this.isOnAdminPage = false;
-    return this.http.post<User>(`${this.baseUrl}/registration`, {
-      email: email,
-      password: password,
-      fio: fio,
-    });
+    return this.http
+      .post<{ token: string }>(`${this.baseUrl}/registration`, {
+        email: email,
+        password: password,
+        fio: fio,
+      })
+      .pipe(
+        map((res) => {
+          if (res.token) {
+            this.isLogged.next(true);
+            localStorage.setItem('isLogged', 'true');
+            localStorage.setItem('del_meetups_auth_token', res.token);
+            this.routes.navigate(['dashboard']);
+          }
+          return res;
+        })
+      );
   }
 
   //! get data from server
