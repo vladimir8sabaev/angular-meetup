@@ -20,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { MeetupformComponent } from './meetupform/meetupform.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MeetupformComponent } from './meetupform/meetupform.component';
     AdminComponent,
     UserComponent,
     MeetupformComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

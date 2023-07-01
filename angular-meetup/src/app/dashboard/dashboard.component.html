@@ -1,11 +1,11 @@
 <button class="newmeetup__btn" (click)="addNew()">Add new meetup</button>
 <div *ngIf="!authService.isFiltered" class="meetup__wrapper">
-  <div *ngFor="let meetup of authService.allMeetups ">
+  <div *ngFor="let meetup of allMeetups ">
     <app-meetup [meetup]="meetup"></app-meetup>
   </div>
 </div>
 <div *ngIf="authService.isFiltered" class="meetup__wrapper">
-  <div *ngFor="let meetup of authService.filteredMeetups ">
+  <div *ngFor="let meetup of filteredMeetups">
     <app-meetup [meetup]="meetup"></app-meetup>
   </div>
 </div>

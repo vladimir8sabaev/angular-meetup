@@ -46,7 +46,12 @@ export class AuthService {
   }
   //! login
 
-  login(email: string | null, password: string | null) {
+  login(
+    email: string | null,
+    password: string | null
+  ): Observable<{
+    token: string;
+  }> {
     return this.http
       .post<{ token: string }>(`${this.baseUrl}/login`, {
         email: email,
@@ -106,7 +111,7 @@ export class AuthService {
 
   //! logout
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('del_meetups_auth_token');
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('isLogged');
@@ -117,26 +122,30 @@ export class AuthService {
 
   //! routes
 
-  goToRegisterPage() {
+  goToRegisterPage(): void {
     this.routes.navigate(['register']);
   }
-  goToLoginPage() {
+  goToLoginPage(): void {
     this.routes.navigate(['login']);
   }
-  goToAdminPage() {
+  goToAdminPage(): void {
     this.routes.navigate(['admin']);
   }
-  goToDashboard() {
+  goToDashboard(): void {
     this.routes.navigate(['dashboard']);
   }
 
-  goToAddNewMeetup() {
+  goToAddNewMeetup(): void {
     this.isEdited = false;
     this.routes.navigate(['meetupform']);
   }
   //! register
 
-  register(email: string | null, password: string | null, fio: string | null) {
+  register(
+    email: string | null,
+    password: string | null,
+    fio: string | null
+  ): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/registration`, {
       email: email,
       password: password,
@@ -146,17 +155,11 @@ export class AuthService {
 
   //! get data from server
 
-  getUsers() {
+  getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.backendOrigin}/user`);
   }
-  getMeetups(): void {
-    this.http
-      .get<Meetup[]>(`${environment.backendOrigin}/meetup`)
-      .subscribe((data) => {
-        console.log(data);
-        this.allMeetups = data;
-        this.filteredMeetups = this.filterMeetups(data);
-      });
+  getMeetups(): Observable<Meetup[]> {
+    return this.http.get<Meetup[]>(`${environment.backendOrigin}/meetup`);
   }
   getRoles(): void {
     this.http
@@ -168,7 +171,10 @@ export class AuthService {
 
   //! subscribe on meetup
 
-  subscribeOnMeetup(meetupId: number, userId: number | undefined) {
+  subscribeOnMeetup(
+    meetupId: number,
+    userId: number | undefined
+  ): Observable<Subscribe> {
     return this.http
       .put<Subscribe>(`${environment.backendOrigin}/meetup`, {
         idMeetup: meetupId,

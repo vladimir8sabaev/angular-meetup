@@ -1,7 +1,7 @@
 .login__wrapper {
   background-color: #1e1e1e;
   width: 100vw;
-  min-height: 100vh;
+  height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
   justify-content: center;
