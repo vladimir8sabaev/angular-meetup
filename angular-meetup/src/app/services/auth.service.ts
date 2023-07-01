@@ -15,7 +15,7 @@ export class AuthService {
   public isAdmin = new Subject<boolean>();
   public isLogged = new Subject<boolean>();
   public isFiltered: boolean = false;
-
+  public isOnAdminPage: boolean = false;
   baseUrl: string = `${environment.backendOrigin}/auth`;
   constructor(private http: HttpClient, private routes: Router) {}
 
@@ -52,6 +52,7 @@ export class AuthService {
   ): Observable<{
     token: string;
   }> {
+    this.isOnAdminPage = false;
     return this.http
       .post<{ token: string }>(`${this.baseUrl}/login`, {
         email: email,
@@ -112,6 +113,7 @@ export class AuthService {
   //! logout
 
   logout(): void {
+    this.isOnAdminPage = false;
     localStorage.removeItem('del_meetups_auth_token');
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('isLogged');
@@ -123,19 +125,24 @@ export class AuthService {
   //! routes
 
   goToRegisterPage(): void {
+    this.isOnAdminPage = false;
     this.routes.navigate(['register']);
   }
   goToLoginPage(): void {
+    this.isOnAdminPage = false;
     this.routes.navigate(['login']);
   }
   goToAdminPage(): void {
+    this.isOnAdminPage = true;
     this.routes.navigate(['admin']);
   }
   goToDashboard(): void {
+    this.isOnAdminPage = false;
     this.routes.navigate(['dashboard']);
   }
 
   goToAddNewMeetup(): void {
+    this.isOnAdminPage = false;
     this.isEdited = false;
     this.routes.navigate(['meetupform']);
   }
@@ -146,6 +153,7 @@ export class AuthService {
     password: string | null,
     fio: string | null
   ): Observable<User> {
+    this.isOnAdminPage = false;
     return this.http.post<User>(`${this.baseUrl}/registration`, {
       email: email,
       password: password,

@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
   isAdmin: boolean = Boolean(localStorage.getItem('isAdmin')) || false;
   isLogged: boolean = Boolean(localStorage.getItem('isLogged')) || false;
   ngOnInit() {

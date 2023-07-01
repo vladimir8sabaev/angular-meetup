@@ -8,7 +8,7 @@ import { User } from '../Interfaces/user';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   allUsers: User[] = [];
 

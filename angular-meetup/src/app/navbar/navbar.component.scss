@@ -38,7 +38,11 @@ nav {
     cursor: pointer;
   }
 }
-
+.active {
+  text-decoration: underline #b85526;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 5px;
+}
 .icons__wrapper {
   display: flex;
   column-gap: 10px;

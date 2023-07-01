@@ -13,9 +13,9 @@
     </div>
   </div>
   <div *ngIf="isLogged" class="buttons__wrapper">
-    <a (click)="openAllMeetups()">All meetups</a>
-    <a (click)="openMyMeetups()">My meetups</a>
-    <a *ngIf="isAdmin" (click)="admin()">Users</a>
+    <a [class.active]="!authService.isFiltered && !authService.isOnAdminPage" (click)="openAllMeetups()">All meetups</a>
+    <a [class.active]="authService.isFiltered && !authService.isOnAdminPage" (click)="openMyMeetups()">My meetups</a>
+    <a [class.active]="authService.isOnAdminPage" *ngIf="isAdmin" (click)="admin()">Users</a>
   </div>
   <div *ngIf="isLogged" class="icons__wrapper">
     <div class="icon"><img src="../../assets/settings.svg" alt="settings"></div>
