@@ -54,6 +54,7 @@ export class MeetupComponent {
     console.log(meetup);
     this.authService.editMeetup();
   }
+
   ngOnInit() {
     if (
       this.meetup.users.filter((item) => {

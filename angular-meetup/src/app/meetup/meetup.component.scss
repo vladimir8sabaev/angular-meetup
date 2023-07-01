@@ -3,6 +3,7 @@
   border: 0.3px solid var(--primary-color, #b4b4c0);
   background: var(--default-color, #2c2c2c);
   padding: 15px 20px;
+  margin-top: 30px;
 }
 
 .mat-mdc-card-header {
@@ -55,6 +56,7 @@
   font-size: 18px;
   color: var(--primary-color, #b4b4c0);
   max-width: 800px;
+  word-wrap: break-word;
 }
 .meetup__go {
   cursor: pointer;

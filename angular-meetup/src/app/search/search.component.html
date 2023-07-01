@@ -1,1 +1,5 @@
-<p>search works!</p>
+<div class="input__wrapper">
+  <img src="../../assets/search.svg" alt="search">
+  <input (input)="onInputChanged()" [(ngModel)]="searchText" type="text"
+    placeholder="Title, description, target audience">
+</div>

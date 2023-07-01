@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Meetup } from '../Interfaces/meetup';
 import { User } from '../Interfaces/user';
@@ -11,8 +11,12 @@ import { Subject } from 'rxjs';
 })
 export class DashboardComponent {
   constructor(public authService: AuthService) {}
+
   allMeetups: Meetup[];
   filteredMeetups: Meetup[];
+
+  searchText: string = '';
+
   getUsers() {
     this.authService.getUsers().subscribe((data) => console.log(data));
   }
@@ -39,5 +43,10 @@ export class DashboardComponent {
     this.authService.isEdited = false;
     this.authService.editedMeetup = null;
     this.authService.goToAddNewMeetup();
+  }
+
+  searchMeetup(searchValue: string) {
+    this.searchText = searchValue;
+    console.log(this.searchText);
   }
 }

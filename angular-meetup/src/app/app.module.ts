@@ -12,7 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { TokenInterseptor } from './interseptors/token-interseptor';
 import { MeetupComponent } from './meetup/meetup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -39,6 +39,7 @@ import { SearchComponent } from './search/search.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
