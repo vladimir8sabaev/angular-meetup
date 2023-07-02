@@ -8,8 +8,13 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent {
   constructor(public authService: AuthService) {}
-  isAdmin: boolean = Boolean(localStorage.getItem('isAdmin')) || false;
-  isLogged: boolean = Boolean(localStorage.getItem('isLogged')) || false;
+  isAdmin: boolean =
+    Boolean(
+      localStorage.getItem('del_meetups_auth_token') &&
+        this.authService.user?.roles.some((item: any) => item.name === 'ADMIN')
+    ) || false;
+  isLogged: boolean =
+    Boolean(localStorage.getItem('del_meetups_auth_token')) || false;
   ngOnInit() {
     this.authService.isLogged.subscribe((data) => {
       this.isLogged = data;

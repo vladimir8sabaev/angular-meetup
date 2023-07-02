@@ -61,10 +61,8 @@ export class AuthService {
         map((res) => {
           if (res.token) {
             this.isLogged.next(true);
-            localStorage.setItem('isLogged', 'true');
             localStorage.setItem('del_meetups_auth_token', res.token);
             if (this.user?.roles[0].name === 'ADMIN') {
-              localStorage.setItem('isAdmin', 'true');
               this.isAdmin.next(true);
             }
             this.routes.navigate(['dashboard']);
