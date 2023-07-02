@@ -1,21 +1,27 @@
 .meetup__wrapper {
+  margin: 0 auto;
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
+  width: 95%;
 }
 .search__wrapper {
   display: flex;
   margin: 0 auto;
+  margin-top: 30px;
   width: 80%;
   max-width: 1300px;
   justify-content: space-between;
+  align-items: center;
+  @media (width < 460px) {
+    width: 95%;
+  }
 }
 .newmeetup__btn {
   display: block;
-  margin-top: 30px;
   cursor: pointer;
   width: 160px;
   height: 50px;
@@ -25,6 +31,21 @@
   border-radius: 5px;
   background: var(--secondary-color, #4c3f78);
   box-shadow: 0px 4px 4px 0px rgba(62, 5, 4, 0.25);
+  @media (width < 1000px) {
+    width: 100px;
+    font-size: 12px;
+  }
+  @media (width < 850px) {
+    height: 30px;
+    font-size: 12px;
+  }
+  @media (width < 450px) {
+    width: 70px;
+    font-size: 10px;
+  }
+  @media (width < 400px) {
+    font-size: 8px;
+  }
 }
 .empty {
   color: white;

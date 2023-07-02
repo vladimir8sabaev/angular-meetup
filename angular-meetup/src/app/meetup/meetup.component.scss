@@ -12,15 +12,6 @@
   filter: opacity(0.5);
 }
 
-.meetup__cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.5);
-}
-
 .mat-mdc-card-header {
   display: flex;
   justify-content: space-between;
@@ -34,11 +25,17 @@
   display: flex;
   justify-content: flex-start;
   column-gap: 10px;
+  @media (width < 550px) {
+    flex-direction: column;
+  }
 }
 .time__wrapper {
   display: flex;
   justify-content: flex-end;
   column-gap: 10px;
+  @media (width < 550px) {
+    flex-direction: column;
+  }
 }
 
 .meetup__title {
@@ -48,6 +45,9 @@
   display: flex;
   align-items: flex-start;
   max-width: 800px;
+  @media (width < 750px) {
+    font-size: 15px;
+  }
 }
 
 .meetup__sub {
@@ -57,6 +57,9 @@
   text-align: center;
   display: flex;
   align-items: center;
+  @media (width < 750px) {
+    font-size: 12px;
+  }
 }
 
 .meetup__date,
@@ -64,6 +67,9 @@
   color: var(--bold-color, #e9e9e9);
   font-size: 24px;
   font-family: "Cherry Bomb One", cursive;
+  @media (width < 750px) {
+    font-size: 15px;
+  }
 }
 .meetup__descr {
   margin-top: 10px;
@@ -72,6 +78,9 @@
   color: var(--primary-color, #b4b4c0);
   max-width: 800px;
   word-wrap: break-word;
+  @media (width < 750px) {
+    font-size: 12px;
+  }
 }
 .meetup__go {
   cursor: pointer;
@@ -109,6 +118,9 @@
   color: var(--bold-color, #e9e9e9);
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
+  @media (width < 750px) {
+    font-size: 12px;
+  }
 }
 .descr__wrapper {
   display: flex;
@@ -126,12 +138,18 @@
   font-size: 18px;
   width: 80%;
   text-align: justify;
+  @media (width < 750px) {
+    font-size: 12px;
+  }
 }
 .meetup__subtitle {
   margin-top: 20px;
   color: var(--bold-color, #e9e9e9);
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
+  @media (width < 750px) {
+    font-size: 15px;
+  }
 }
 .meetup__target {
   padding-left: 10px;
@@ -139,6 +157,9 @@
   color: var(--primary-color, #b4b4c0);
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
+  @media (width < 750px) {
+    font-size: 12px;
+  }
 }
 .author__wrapper {
   margin-top: 20px;

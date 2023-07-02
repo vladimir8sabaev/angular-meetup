@@ -1,14 +1,31 @@
 .input__wrapper {
   position: relative;
+  max-width: 1000px;
   width: 1000px;
   margin: 0 auto;
-  margin-top: 30px;
   height: 50px;
+  @media (width < 1500px) {
+    width: 750px;
+  }
+  @media (width < 1200px) {
+    width: 500px;
+  }
+  @media (width < 850px) {
+    width: 300px;
+    height: 30px;
+  }
+  @media (width < 600px) {
+    width: 250px;
+  }
   img {
     position: absolute;
     width: 50px;
     height: 50px;
     right: 10px;
+    @media (width < 850px) {
+      width: 20px;
+      top: -8px;
+    }
   }
 }
 input {
@@ -30,5 +47,11 @@ input {
     background: var(--primary-color, #bcb3b3);
     border: none;
     border: 5px solid var(--secondary-color, #4c3f78);
+  }
+  @media (width < 850px) {
+    font-size: 12px;
+  }
+  @media (width < 460px) {
+    font-size: 10px;
   }
 }

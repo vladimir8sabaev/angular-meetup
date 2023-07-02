@@ -1,4 +1,7 @@
 <nav>
+  <div class="img__small">
+    <img src="../../assets/league.svg" alt="league">
+  </div>
   <div class="img__wrapper">
     <div class="nav__meetup">
       <img src="../../assets/MeetUps.png" alt="MeetUps">
@@ -13,8 +16,10 @@
     </div>
   </div>
   <div *ngIf="isLogged" class="buttons__wrapper">
-    <a [class.active]="!authService.isFiltered && !authService.isOnAdminPage" (click)="openAllMeetups()">All meetups</a>
-    <a [class.active]="authService.isFiltered && !authService.isOnAdminPage" (click)="openMyMeetups()">My meetups</a>
+    <a [class.active]="!authService.isFiltered && !authService.isOnAdminPage" (click)="openAllMeetups()"><span
+        class="ordinary">All meetups</span> <span class="small">All</span></a>
+    <a [class.active]="authService.isFiltered && !authService.isOnAdminPage" (click)="openMyMeetups()"><span
+        class="ordinary">My meetups</span> <span class="small">My</span></a>
     <a [class.active]="authService.isOnAdminPage" *ngIf="isAdmin" (click)="admin()">Users</a>
   </div>
   <div *ngIf="isLogged" class="icons__wrapper">
