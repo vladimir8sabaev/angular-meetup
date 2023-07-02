@@ -40,7 +40,10 @@ export class LoginComponent {
         this.loginForm.value.password || ''
       )
       .subscribe(
-        (data) => console.log(data),
+        (data) => {
+          console.log(data);
+          console.log(this.authService.user);
+        },
         (error: HttpErrorResponse) => {
           this.message = error.error.message;
           this.isRegistered = false;
