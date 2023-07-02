@@ -1,10 +1,24 @@
 .meetup__card {
+  position: relative;
   max-width: 1300px;
   border: 0.3px solid var(--primary-color, #b4b4c0);
   background: var(--default-color, #2c2c2c);
   padding: 15px 20px;
   margin-top: 30px;
   overflow: hidden;
+}
+
+.held {
+  filter: opacity(0.5);
+}
+
+.meetup__cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
 }
 
 .mat-mdc-card-header {
@@ -32,7 +46,7 @@
   font-size: 24px;
   font-family: "Cherry Bomb One", cursive;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   max-width: 800px;
 }
 
@@ -129,4 +143,11 @@
 .author__wrapper {
   margin-top: 20px;
   display: flex;
+}
+button:disabled,
+button[disabled] {
+  cursor: default;
+  border: 1px solid #999999;
+  background-color: #a5a5a5;
+  color: #666666;
 }

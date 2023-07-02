@@ -38,7 +38,9 @@ export class MeetupformComponent {
     if (date) {
       const normalDate = new Date(date);
       finalDate = date.slice(0, 10);
-      finalTime = `${normalDate.getHours()}:${normalDate.getMinutes()}`;
+      finalTime = `${normalDate.getHours()}:${
+        (normalDate.getMinutes() < 10 ? '0' : '') + normalDate.getMinutes()
+      }`;
     }
 
     this.meetupForm = this.fb.nonNullable.group({

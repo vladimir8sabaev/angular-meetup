@@ -1,4 +1,4 @@
-<mat-card class="meetup__card">
+<mat-card [class.held]="!isAvailable" class="meetup__card">
   <mat-card-content>
     <div class="flex__wrapper">
       <div class="title__wrapper">
@@ -12,7 +12,8 @@
     </div>
     <div class="descr__wrapper">
       <div class="meetup__descr">{{meetup.description}}</div>
-      <div class="meetup__location">Place: {{meetup.location}}</div>
+      <div *ngIf="isAvailable" class="meetup__location">Place: {{meetup.location}}</div>
+      <div *ngIf="!isAvailable" class="meetup__location">Meeting held</div>
     </div>
 
     <div [@bodyExpansion]="state" class="expandable-content">
@@ -66,7 +67,8 @@
   <mat-card-actions class="meetup__btn__wrapper">
     <button *ngIf="checkOwner()" class="meetup__go meetup__go-edit" (click)="editMeetup(meetup)"> Edit
     </button>
-    <button *ngIf="!isSub" class="meetup__go" (click)="subscribeOnMeetup()">I will come!</button>
+    <button *ngIf="!isSub && isAvailable" class="meetup__go" (click)="subscribeOnMeetup()">I will come!</button>
+    <button disabled *ngIf="!isSub && !isAvailable" class="meetup__go">I will come!</button>
     <button *ngIf="isSub" class="meetup__go meetup__go-cancel" (click)="cancelSubscribeOnMeetup()">I will not
       come</button>
     <button class="meetup__expand" (click)="toggle()">

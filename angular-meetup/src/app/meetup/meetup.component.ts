@@ -29,6 +29,7 @@ export class MeetupComponent {
   @Input() meetup: Meetup;
   state = 'collapsed';
   isSub: boolean = false;
+  isAvailable: boolean;
   toggle(): void {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
   }
@@ -54,8 +55,11 @@ export class MeetupComponent {
     console.log(meetup);
     this.authService.editMeetup();
   }
-
+  checkDate(): void {
+    this.isAvailable = new Date() < new Date(this.meetup.time);
+  }
   ngOnInit() {
+    this.checkDate();
     if (
       this.meetup.users.filter((item) => {
         return item.id === this.authService.user?.id;
@@ -63,7 +67,5 @@ export class MeetupComponent {
     ) {
       this.isSub = true;
     }
-
-    console.log(this.authService.user?.id);
   }
 }
