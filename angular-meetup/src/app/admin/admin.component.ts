@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from '../Interfaces/user';
-import { interval } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +10,8 @@ import { interval } from 'rxjs';
 })
 export class AdminComponent {
   constructor(public authService: AuthService) {}
-
+  timeToUpdate = interval(30000);
+  sub: Subscription;
   allUsers: User[] = [];
 
   getUsers() {
@@ -23,13 +24,15 @@ export class AdminComponent {
   ngOnInit() {
     this.authService.getRoles();
     this.getUsers();
-    const timeToUpdate = interval(30000);
-    timeToUpdate.subscribe(() => {
+    this.sub = this.timeToUpdate.subscribe(() => {
       this.authService.getRoles();
       this.getUsers();
     });
     this.authService.refresh.subscribe(() => {
       this.getUsers();
     });
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Meetup } from '../Interfaces/meetup';
 import { User } from '../Interfaces/user';
-import { Subject, interval } from 'rxjs';
+import { Observer, Subject, Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +11,8 @@ import { Subject, interval } from 'rxjs';
 })
 export class DashboardComponent {
   constructor(public authService: AuthService) {}
-
+  timeToUpdate = interval(30000);
+  sub: Subscription;
   allMeetups: Meetup[];
   filteredMeetups: Meetup[];
 
@@ -34,13 +35,17 @@ export class DashboardComponent {
 
   ngOnInit() {
     this.getMeetups();
-    const timeToUpdate = interval(30000);
-    timeToUpdate.subscribe(() => {
+    this.sub = this.timeToUpdate.subscribe(() => {
       this.getMeetups();
+      console.log('data updated');
     });
     this.authService.refresh.subscribe(() => {
       this.getMeetups();
     });
+  }
+  ngOnDestroy() {
+    console.log('unsubbed');
+    this.sub.unsubscribe();
   }
 
   addNew() {

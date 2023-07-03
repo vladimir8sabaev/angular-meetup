@@ -75,7 +75,6 @@ export class UserComponent {
     console.log(this.user.roles[0].name);
   }
   deleteUser(user: User) {
-    alert('Turn this method on in user component ts!');
-    // this.authService.deleteUser(user).subscribe((data) => console.log(data));
+    this.authService.deleteUser(user).subscribe((data) => console.log(data));
   }
 }
