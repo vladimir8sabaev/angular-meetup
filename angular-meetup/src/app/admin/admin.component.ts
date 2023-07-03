@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from '../Interfaces/user';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -22,6 +23,11 @@ export class AdminComponent {
   ngOnInit() {
     this.authService.getRoles();
     this.getUsers();
+    const timeToUpdate = interval(30000);
+    timeToUpdate.subscribe(() => {
+      this.authService.getRoles();
+      this.getUsers();
+    });
     this.authService.refresh.subscribe(() => {
       this.getUsers();
     });

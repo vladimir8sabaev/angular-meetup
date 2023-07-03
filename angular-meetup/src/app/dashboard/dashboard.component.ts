@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Meetup } from '../Interfaces/meetup';
 import { User } from '../Interfaces/user';
-import { Subject } from 'rxjs';
+import { Subject, interval } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,6 +34,10 @@ export class DashboardComponent {
 
   ngOnInit() {
     this.getMeetups();
+    const timeToUpdate = interval(30000);
+    timeToUpdate.subscribe(() => {
+      this.getMeetups();
+    });
     this.authService.refresh.subscribe(() => {
       this.getMeetups();
     });
