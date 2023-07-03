@@ -7,6 +7,7 @@ import { loginGuard } from './guards/login.guard';
 import { AdminComponent } from './admin/admin.component';
 import { adminGuard } from './guards/admin.guard';
 import { MeetupformComponent } from './meetupform/meetupform.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'meetupform',
     component: MeetupformComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
     canActivate: [loginGuard],
   },
 ];

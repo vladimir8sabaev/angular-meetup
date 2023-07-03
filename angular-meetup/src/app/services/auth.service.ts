@@ -143,6 +143,11 @@ export class AuthService {
     this.isEdited = false;
     this.routes.navigate(['meetupform']);
   }
+
+  goToSettings() {
+    this.routes.navigate(['settings']);
+  }
+
   //! register
 
   register(

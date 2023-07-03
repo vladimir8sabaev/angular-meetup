@@ -40,4 +40,7 @@ export class NavbarComponent {
     this.dashboard();
     this.authService.openAllMeetups();
   }
+  openSettings() {
+    this.authService.goToSettings();
+  }
 }
