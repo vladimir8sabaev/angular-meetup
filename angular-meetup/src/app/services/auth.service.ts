@@ -168,7 +168,6 @@ export class AuthService {
         map((res) => {
           if (res.token) {
             this.isLogged.next(true);
-            localStorage.setItem('isLogged', 'true');
             localStorage.setItem('del_meetups_auth_token', res.token);
             this.routes.navigate(['dashboard']);
           }
